@@ -19,7 +19,7 @@ const routes: Route[] = [
       import('./app/components/admin/admin/admin.component').then(
         (route) => route.AdminComponent
       ),
-   
+    providers: [CanActiveAdminService],
     canActivate: [CanActiveAdminService],
   },
   {
@@ -27,7 +27,6 @@ const routes: Route[] = [
     redirectTo: 'components',
     pathMatch: 'full',
   },
-]; 
+];
 
-bootstrapApplication(AppComponent, 
-  { providers: [provideRouter(routes),CanActiveAdminService, importProvidersFrom(BrowserAnimationsModule)] });
+bootstrapApplication(AppComponent, { providers: [provideRouter(routes), importProvidersFrom(BrowserAnimationsModule)] });
