@@ -1,7 +1,32 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter, Route } from '@angular/router';
+import { AppComponent } from './app/app.component';
+import { CanActiveAdminService } from './app/services/can-active-admin.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { importProvidersFrom } from '@angular/core';
 
-import { AppModule } from './app/app.module';
+const routes: Route[] = [
+  {
+    path: 'components',
+    loadChildren: () =>
+      import('./app/components/side-nav/routers').then(
+        (route) => route.COMPONENT_ROUTES
+      ),
+  },
+  {
+    path: 'admin',
+    loadComponent: () =>
+      import('./app/components/admin/admin/admin.component').then(
+        (route) => route.AdminComponent
+      ),
+    providers: [CanActiveAdminService],
+    canActivate: [CanActiveAdminService],
+  },
+  {
+    path: '**',
+    redirectTo: 'components',
+    pathMatch: 'full',
+  },
+];
 
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, { providers: [provideRouter(routes), importProvidersFrom(BrowserAnimationsModule)] });
