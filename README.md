@@ -2,6 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
 ### Opcion main.ts (el provider del canActivate tambien puede ir con los providers dentro de la bootstrapAplication)
+main.ts
 ```
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, Route } from '@angular/router';
@@ -34,7 +35,8 @@ const routes: Route[] = [
   },
 ];
 
-bootstrapApplication(AppComponent, { providers: [provideRouter(routes),CanActiveAdminService, importProvidersFrom(BrowserAnimationsModule)] });
+bootstrapApplication(AppComponent,
+{ providers: [provideRouter(routes),CanActiveAdminService, importProvidersFrom(BrowserAnimationsModule)] });
 ```
 ## Development server
 
